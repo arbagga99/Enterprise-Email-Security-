@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Enterprise Email Security – Quarantine Digest</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+  <style>
+    :root { --fg:#1f2937; --muted:#6b7280; --card:#f8fafc; --line:#e5e7eb; }
+    body { font-family: system-ui, Arial, sans-serif; margin: 24px; color: var(--fg); }
+    h1 { margin: 0 0 8px; }
+    .muted { color: var(--muted); }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); }
+    .card { background: var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; }
+    .kpi { font-size: 28px; font-weight: 700; }
+    table { width:100%; border-collapse: collapse; }
+    th, td { padding:8px 10px; border-bottom:1px solid var(--line); text-align:left; font-size:14px; }
+    th { background:#ffffff; position:sticky; top:0; z-index:1; }
+    .risk-high { color:#b91c1c; font-weight:700; }
+    .risk-low { color:#047857; font-weight:600; }
+    .overflow { max-height: 340px; overflow:auto; background:#fff; border-radius:12px; border:1px solid var(--line); }
+    .footer { margin-top: 24px; font-size: 12px; color: var(--muted); }
+    .chip { display:inline-block; padding:4px 8px; border-radius:999px; background:#eef2ff; margin-right:6px; font-size:12px; }
+  </style>
+</head>
+<body>
+  <h1>Enterprise Email Security – Quarantine Digest</h1>
+  <div class="muted" id="runAt">Loading…</div>
+
+  <div class="grid" style="margin-top:14px;">
+    <div class="card">
+      <div class="muted">Total Scanned</div>
+      <div class="kpi" id="kpiTotal">–</div>
+    </div>
+    <div class="card">
+      <div class="muted">Blocked Spam</div>
+      <div class="kpi" id="kpiSpam">–</div>
+    </div>
+    <div class="card">
+      <div class="muted">Blocked Phishing</div>
+      <div class="kpi" id="kpiPhish">–</div>
+    </div>
+    <div class="card">
+      <div class="muted">Blocked Malware</div>
+      <div class="kpi" id="kpiMal">–</div>
+    </div>
+    <div class="card">
+      <div class="muted">False Positives</div>
+      <div class="kpi" id="kpiFP">–</div>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top:16px;">
+    <div class="card">
+      <canvas id="rulesChart" height="160"></canvas>
+    </div>
+    <div class="card">
+      <canvas id="trendChart" height="160"></canvas>
+      <div class="muted" style="font-size:12px;margin-top:6px">
+        (Trend renders if <code>data/demo_summary_large.csv</code> is present)
+      </div>
+    </div>
+  </div>
+
+  <div class="grid" style="margin-top:16px;">
+    <div class="card">
+      <h3 style="margin:0 0 8px;">Top Rules</h3>
+      <div id="topRules"></div>
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 8px;">Top Senders</h3>
+      <div id="topSenders"></div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:16px;">
+    <h3 style="margin:0 0 8px;">High-Risk Alerts</h3>
+    <div class="overflow">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:170px">Time (UTC)</th>
+            <th style="width:240px">From</th>
+            <th>Subject</th>
+            <th style="width:120px">Rule</th>
+            <th style="width:90px">Risk</th>
+            <th style="width:120px">Action</th>
+          </tr>
+        </thead>
+        <tbody id="alertsBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="footer">
+    Uses demo files if live outputs are absent. Files searched in order:
+    <code>data/summary.json → data/demo_summary.json</code>,
+    <code>data/alerts.json → data/demo_alerts.json</code>.
+  </div>
+
+<script>
+async function tryFetch(paths, type="json") {
+  for (const p of paths) {
+    try {
+      const r = await fetch(p);
+      if (r.ok) return type === "json" ? await r.json() : await r.text();
+    } catch (_) {}
+  }
+  return null;
+}
+
+function setKPI(id, val){ document.getElementById(id).textContent = val?.toLocaleString?.() ?? "–"; }
+function chip(text){ return `<span class="chip">${text}</span>`; }
+
+function renderTopList(containerId, pairs, labelFormatter=(x)=>x){
+  const el = document.getElementById(containerId);
+  if (!pairs || pairs.length===0){ el.innerHTML = '<span class="muted">No data</span>'; return; }
+  el.innerHTML = pairs.slice(0,8).map(([k,v]) => `${chip(`${labelFormatter(k)} — ${v}`)}`).join("");
+}
+
+function makeBarChart(ctx, labels, data, title){
+  new Chart(ctx, {
+    type: 'bar',
+    data: { labels, datasets: [{ label: title, data }] },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{ y:{ beginAtZero:true } }
+    }
+  });
+}
+
+function makeLineChart(ctx, labels, series, title){
+  new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets: [{ label: title, data: series, tension:0.2 }] },
+    options: {
+      responsive:true, maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{ y:{ beginAtZero:true } }
+    }
+  });
+}
+
+async function loadSummary(){
+  const summary = await tryFetch(["../data/summary.json","../data/demo_summary.json","../../data/demo_summary.json"]);
+  if (!summary) return null;
+
+  // If summary is an array (from large JSON), pick latest; else it's a single object
+  const s = Array.isArray(summary) ? summary[summary.length-1] : summary;
+
+  document.getElementById("runAt").textContent = `Run at: ${s.run_at || '—'}`;
+  setKPI("kpiTotal", s.scanned_messages);
+  setKPI("kpiSpam", s.blocked_spam ?? 0);
+  setKPI("kpiPhish", s.blocked_phishing ?? 0);
+  setKPI("kpiMal", s.blocked_malware ?? 0);
+  setKPI("kpiFP", s.false_positives ?? 0);
+
+  // Charts + chips
+  const rulesPairs = (s.top_rules || []).map(x => Array.isArray(x)?x:[x.rule||x[0], x.hits||x[1]]);
+  const sendersPairs = (s.top_senders || []).map(x => Array.isArray(x)?x:[x.domain||x[0]||x.sender, x.count||x[1]]);
+
+  renderTopList("topRules", rulesPairs);
+  renderTopList("topSenders", sendersPairs);
+
+  const rulesCtx = document.getElementById("rulesChart").getContext("2d");
+  makeBarChart(rulesCtx, rulesPairs.map(p=>p[0]), rulesPairs.map(p=>p[1]), "Rule Hits");
+
+  return true;
+}
+
+async function loadTrend(){
+  // optional CSV trend (demo_summary_large.csv)
+  const csv = await tryFetch(["../data/demo_summary_large.csv","../../data/demo_summary_large.csv"], "text");
+  if (!csv) return;
+  const lines = csv.trim().split(/\r?\n/);
+  const header = lines.shift().split(",");
+  const idxRun = header.indexOf("run_at");
+  const idxSpam = header.indexOf("blocked_spam");
+  const idxPhish = header.indexOf("blocked_phishing");
+  const labels = [], series = [];
+  lines.slice(-30).forEach(row => {
+    const cols = splitCSV(row);
+    labels.push(cols[idxRun].replace("T00:00:00Z","").replace("T09:00:00Z",""));
+    series.push(Number(cols[idxSpam]) + Number(cols[idxPhish]));
+  });
+  const trendCtx = document.getElementById("trendChart").getContext("2d");
+  makeLineChart(trendCtx, labels, series, "Daily Spam+Phish");
+}
+
+function splitCSV(row){
+  // minimal CSV splitter (handles quoted commas)
+  const out=[]; let cur="", q=false;
+  for (let i=0;i<row.length;i++){
+    const c=row[i];
+    if (c==='\"'){ q=!q; cur+=c; }
+    else if (c===',' && !q){ out.push(cur); cur=""; }
+    else cur+=c;
+  }
+  out.push(cur);
+  return out.map(s=>s.replace(/^\"|\"$/g,""));
+}
+
+async function loadAlerts(){
+  const alerts = await tryFetch(["../data/alerts.json","../data/demo_alerts.json","../../data/demo_alerts.json"]);
+  const body = document.getElementById("alertsBody");
+  if (!alerts || alerts.length===0){ body.innerHTML = '<tr><td colspan="6" class="muted">No alerts</td></tr>'; return; }
+  const highs = alerts.filter(a => (a.risk||"").toLowerCase()==="high");
+  body.innerHTML = (highs.length?highs:alerts).slice(0,200).map(a=>`
+    <tr>
+      <td>${a.ts||""}</td>
+      <td>${a.from||""}</td>
+      <td>${a.subject||""}</td>
+      <td>${a.rule||""}</td>
+      <td class="${(a.risk||'').toLowerCase()==='high'?'risk-high':'risk-low'}">${a.risk||""}</td>
+      <td>${a.action||""}</td>
+    </tr>
+  `).join("");
+}
+
+(async ()=>{
+  await loadSummary();
+  await loadTrend();
+  await loadAlerts();
+})();
+</script>
+</body>
+</html>
