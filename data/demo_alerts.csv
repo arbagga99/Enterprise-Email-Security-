@@ -1,0 +1,21 @@
+ts,from,subject,rule,risk,action
+2025-09-05T08:15:23Z,badguy@phish.com,Password Reset Required,PHISH_URL,high,quarantined
+2025-09-05T08:20:45Z,it-support@fakecorp.com,System Update,MAL_ATTACH,high,quarantined
+2025-09-05T08:32:10Z,hr@payro1l.example,Urgent Payroll Update,PHISH_URL,high,quarantined
+2025-09-05T08:40:00Z,trusted@partner.com,Invoice Q3,CLEAN,low,delivered
+2025-09-05T08:50:12Z,ceo@companny.example,Wire Transfer Request,BEC_LIKE,high,quarantined
+2025-09-05T09:02:33Z,marketing@adsblast.com,Exclusive Offer,SPF_FAIL,medium,quarantined
+2025-09-05T09:10:47Z,support@amazon.fake,Account Locked,PHISH_URL,high,quarantined
+2025-09-05T09:22:55Z,news@trustednews.com,Daily Newsletter,CLEAN,low,delivered
+2025-09-05T09:30:05Z,bank@securepay.fake,Confirm Transaction,DMARC_FAIL,high,quarantined
+2025-09-05T09:41:44Z,service@paypal.fake,Unusual Activity Detected,PHISH_URL,high,quarantined
+2025-09-05T09:55:13Z,hr@company.com,Holiday Policy Update,CLEAN,low,delivered
+2025-09-05T10:02:27Z,alerts@security.fake,Antivirus Update,MAL_ATTACH,high,quarantined
+2025-09-05T10:18:50Z,admin@vpn.fake,VPN Login Alert,PHISH_URL,high,quarantined
+2025-09-05T10:25:09Z,it-support@fakecorp.com,Password Expiry Notice,SPF_FAIL,medium,quarantined
+2025-09-05T10:40:33Z,boss@executive.fake,Approve Payment,BEC_LIKE,high,quarantined
+2025-09-05T10:52:17Z,shop@onlinestore.fake,Your Order Invoice,MAL_ATTACH,high,quarantined
+2025-09-05T11:05:40Z,friend@example.com,Lunch Tomorrow?,CLEAN,low,delivered
+2025-09-05T11:15:22Z,finance@accounts.fake,Payment Reminder,PHISH_URL,high,quarantined
+2025-09-05T11:25:48Z,security@alerts.fake,Security Warning,DMARC_FAIL,high,quarantined
+2025-09-05T11:40:13Z,update@windows.fake,Install Patch,MAL_ATTACH,high,quarantined
