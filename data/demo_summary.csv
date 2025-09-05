@@ -1,0 +1,4 @@
+run_at,scanned_messages,blocked_spam,blocked_phishing,blocked_malware,false_positives,top_rules,top_senders
+2025-09-05T09:00:00Z,500,120,65,42,3,"[['SPF_FAIL', 120], ['PHISH_URL', 65], ['MAL_ATTACH', 42], ['DMARC_FAIL', 20], ['BEC_LIKE', 10]]","[['badguy@phish.com', 40], ['it-support@fakecorp.com', 25], ['hr@payro1l.example', 15], ['ceo@companny.example', 10], ['bank@securepay.fake', 8]]"
+2025-09-06T09:00:00Z,480,110,72,38,4,"[['SPF_FAIL', 110], ['PHISH_URL', 72], ['MAL_ATTACH', 38], ['DMARC_FAIL', 18], ['BEC_LIKE', 12]]","[['service@paypal.fake', 20], ['alerts@security.fake', 15], ['admin@vpn.fake', 12], ['boss@executive.fake', 10], ['finance@accounts.fake', 8]]"
+2025-09-07T09:00:00Z,510,130,60,45,2,"[['SPF_FAIL', 130], ['PHISH_URL', 60], ['MAL_ATTACH', 45], ['DMARC_FAIL', 25], ['BEC_LIKE', 11]]","[['marketing@adsblast.com', 22], ['shop@onlinestore.fake', 18], ['update@windows.fake', 12], ['badguy@phish.com', 11], ['it-support@fakecorp.com', 10]]"
