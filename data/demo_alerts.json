@@ -1,0 +1,1602 @@
+[
+  {
+    "ts": "2025-09-01T08:00:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Security Warning",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T08:10:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "System Update",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T08:20:00Z",
+    "from": "update@windows.fake",
+    "subject": "Unusual Activity Detected",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T08:30:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Confirm Transaction",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T08:40:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Urgent Payroll Update",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T08:50:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Daily Newsletter",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T09:00:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Password Expiry Notice",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T09:10:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Exclusive Offer",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T09:20:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Account Locked",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T09:30:00Z",
+    "from": "service@paypal.fake",
+    "subject": "Password Expiry Notice",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T09:40:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Account Locked",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T09:50:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Install Patch",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T10:00:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Urgent Payroll Update",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T10:10:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Payment Reminder",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T10:20:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Antivirus Update",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T10:30:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Password Expiry Notice",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T10:40:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Lunch Tomorrow?",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T10:50:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Confirm Transaction",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T11:00:00Z",
+    "from": "noreply@random.com",
+    "subject": "Unusual Activity Detected",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T11:10:00Z",
+    "from": "service@paypal.fake",
+    "subject": "Password Reset Required",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T11:20:00Z",
+    "from": "boss@executive.fake",
+    "subject": "Urgent Payroll Update",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T11:30:00Z",
+    "from": "update@windows.fake",
+    "subject": "Confirm Transaction",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T11:40:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Install Patch",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T11:50:00Z",
+    "from": "friend@example.com",
+    "subject": "Confirm Transaction",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T12:00:00Z",
+    "from": "admin@vpn.fake",
+    "subject": "Install Patch",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T12:10:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Daily Newsletter",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T12:20:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Install Patch",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T12:30:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Wire Transfer Request",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T12:40:00Z",
+    "from": "admin@vpn.fake",
+    "subject": "Urgent Payroll Update",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T12:50:00Z",
+    "from": "news@trustednews.com",
+    "subject": "VPN Login Alert",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T13:00:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Wire Transfer Request",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T13:10:00Z",
+    "from": "noreply@random.com",
+    "subject": "Urgent Payroll Update",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T13:20:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Wire Transfer Request",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T13:30:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Daily Newsletter",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T13:40:00Z",
+    "from": "noreply@random.com",
+    "subject": "Install Patch",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T13:50:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Password Reset Required",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T14:00:00Z",
+    "from": "bank@securepay.fake",
+    "subject": "Password Reset Required",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T14:10:00Z",
+    "from": "noreply@random.com",
+    "subject": "Urgent Payroll Update",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T14:20:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Urgent Payroll Update",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T14:30:00Z",
+    "from": "update@windows.fake",
+    "subject": "Invoice Q3",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T14:40:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Security Warning",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T14:50:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Password Expiry Notice",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T15:00:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Antivirus Update",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T15:10:00Z",
+    "from": "noreply@random.com",
+    "subject": "Wire Transfer Request",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T15:20:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Wire Transfer Request",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T15:30:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Wire Transfer Request",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T15:40:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Antivirus Update",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T15:50:00Z",
+    "from": "noreply@random.com",
+    "subject": "Unusual Activity Detected",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T16:00:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Daily Newsletter",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T16:10:00Z",
+    "from": "friend@example.com",
+    "subject": "Password Expiry Notice",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T16:20:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Holiday Policy Update",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T16:30:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Install Patch",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T16:40:00Z",
+    "from": "bank@securepay.fake",
+    "subject": "Exclusive Offer",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T16:50:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Your Order Invoice",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T17:00:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Password Reset Required",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T17:10:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Unusual Activity Detected",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T17:20:00Z",
+    "from": "trusted@partner.com",
+    "subject": "VPN Login Alert",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T17:30:00Z",
+    "from": "admin@vpn.fake",
+    "subject": "Antivirus Update",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T17:40:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Antivirus Update",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T17:50:00Z",
+    "from": "noreply@random.com",
+    "subject": "VPN Login Alert",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T18:00:00Z",
+    "from": "ceo@companny.example",
+    "subject": "VPN Login Alert",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T18:10:00Z",
+    "from": "update@windows.fake",
+    "subject": "Holiday Policy Update",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T18:20:00Z",
+    "from": "boss@executive.fake",
+    "subject": "Invoice Q3",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T18:30:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Password Reset Required",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T18:40:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Install Patch",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T18:50:00Z",
+    "from": "trusted@partner.com",
+    "subject": "System Update",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T19:00:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Password Reset Required",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-01T19:10:00Z",
+    "from": "badguy@phish.com",
+    "subject": "System Update",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T19:20:00Z",
+    "from": "friend@example.com",
+    "subject": "VPN Login Alert",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T19:30:00Z",
+    "from": "boss@executive.fake",
+    "subject": "Account Locked",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T19:40:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Password Expiry Notice",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T19:50:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Payment Reminder",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T20:00:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Lunch Tomorrow?",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T20:10:00Z",
+    "from": "boss@executive.fake",
+    "subject": "Exclusive Offer",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T20:20:00Z",
+    "from": "noreply@random.com",
+    "subject": "Password Reset Required",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T20:30:00Z",
+    "from": "service@paypal.fake",
+    "subject": "Wire Transfer Request",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T20:40:00Z",
+    "from": "news@trustednews.com",
+    "subject": "VPN Login Alert",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T20:50:00Z",
+    "from": "boss@executive.fake",
+    "subject": "Holiday Policy Update",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T21:00:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Payment Reminder",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T21:10:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Password Reset Required",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T21:20:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Exclusive Offer",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T21:30:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Your Order Invoice",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T21:40:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Daily Newsletter",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T21:50:00Z",
+    "from": "noreply@random.com",
+    "subject": "Approve Payment",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T22:00:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Antivirus Update",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T22:10:00Z",
+    "from": "bank@securepay.fake",
+    "subject": "Confirm Transaction",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T22:20:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Password Reset Required",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T22:30:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Unusual Activity Detected",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T22:40:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Daily Newsletter",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T22:50:00Z",
+    "from": "update@windows.fake",
+    "subject": "Invoice Q3",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T23:00:00Z",
+    "from": "ceo@companny.example",
+    "subject": "System Update",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T23:10:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Password Reset Required",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T23:20:00Z",
+    "from": "friend@example.com",
+    "subject": "Daily Newsletter",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T23:30:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Payment Reminder",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T23:40:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Password Expiry Notice",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-01T23:50:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Lunch Tomorrow?",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T00:00:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Wire Transfer Request",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T00:10:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Password Expiry Notice",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T00:20:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Password Expiry Notice",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T00:30:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Invoice Q3",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T00:40:00Z",
+    "from": "update@windows.fake",
+    "subject": "Lunch Tomorrow?",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T00:50:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Password Reset Required",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T01:00:00Z",
+    "from": "friend@example.com",
+    "subject": "Urgent Payroll Update",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T01:10:00Z",
+    "from": "bank@securepay.fake",
+    "subject": "Install Patch",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T01:20:00Z",
+    "from": "noreply@random.com",
+    "subject": "Password Reset Required",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T01:30:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Install Patch",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T01:40:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Install Patch",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T01:50:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Your Order Invoice",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T02:00:00Z",
+    "from": "trusted@partner.com",
+    "subject": "Wire Transfer Request",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T02:10:00Z",
+    "from": "friend@example.com",
+    "subject": "Lunch Tomorrow?",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T02:20:00Z",
+    "from": "friend@example.com",
+    "subject": "Approve Payment",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T02:30:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "System Update",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T02:40:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Install Patch",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T02:50:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Lunch Tomorrow?",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T03:00:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Urgent Payroll Update",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T03:10:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Password Reset Required",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T03:20:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "System Update",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T03:30:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Daily Newsletter",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T03:40:00Z",
+    "from": "noreply@random.com",
+    "subject": "Confirm Transaction",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T03:50:00Z",
+    "from": "trusted@partner.com",
+    "subject": "Payment Reminder",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T04:00:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Password Reset Required",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T04:10:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Password Reset Required",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T04:20:00Z",
+    "from": "trusted@partner.com",
+    "subject": "Approve Payment",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T04:30:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Approve Payment",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T04:40:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Daily Newsletter",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T04:50:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Urgent Payroll Update",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T05:00:00Z",
+    "from": "boss@executive.fake",
+    "subject": "Account Locked",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T05:10:00Z",
+    "from": "alerts@security.fake",
+    "subject": "VPN Login Alert",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T05:20:00Z",
+    "from": "service@paypal.fake",
+    "subject": "Account Locked",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T05:30:00Z",
+    "from": "update@windows.fake",
+    "subject": "Invoice Q3",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T05:40:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Daily Newsletter",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T05:50:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Approve Payment",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T06:00:00Z",
+    "from": "friend@example.com",
+    "subject": "Security Warning",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T06:10:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Account Locked",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T06:20:00Z",
+    "from": "service@paypal.fake",
+    "subject": "Your Order Invoice",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T06:30:00Z",
+    "from": "noreply@random.com",
+    "subject": "Password Expiry Notice",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T06:40:00Z",
+    "from": "noreply@random.com",
+    "subject": "Wire Transfer Request",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T06:50:00Z",
+    "from": "bank@securepay.fake",
+    "subject": "Confirm Transaction",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T07:00:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Account Locked",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T07:10:00Z",
+    "from": "alerts@security.fake",
+    "subject": "Approve Payment",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T07:20:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Unusual Activity Detected",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T07:30:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Daily Newsletter",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T07:40:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Unusual Activity Detected",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T07:50:00Z",
+    "from": "friend@example.com",
+    "subject": "Password Expiry Notice",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T08:00:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Daily Newsletter",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T08:10:00Z",
+    "from": "update@windows.fake",
+    "subject": "Password Expiry Notice",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T08:20:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Holiday Policy Update",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T08:30:00Z",
+    "from": "noreply@random.com",
+    "subject": "Lunch Tomorrow?",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T08:40:00Z",
+    "from": "service@paypal.fake",
+    "subject": "Holiday Policy Update",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T08:50:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Password Expiry Notice",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T09:00:00Z",
+    "from": "bank@securepay.fake",
+    "subject": "Your Order Invoice",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T09:10:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Confirm Transaction",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T09:20:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Confirm Transaction",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T09:30:00Z",
+    "from": "service@paypal.fake",
+    "subject": "Security Warning",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T09:40:00Z",
+    "from": "update@windows.fake",
+    "subject": "Wire Transfer Request",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T09:50:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Invoice Q3",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T10:00:00Z",
+    "from": "friend@example.com",
+    "subject": "Unusual Activity Detected",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T10:10:00Z",
+    "from": "noreply@random.com",
+    "subject": "Security Warning",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T10:20:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Password Expiry Notice",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T10:30:00Z",
+    "from": "friend@example.com",
+    "subject": "Payment Reminder",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T10:40:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Lunch Tomorrow?",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T10:50:00Z",
+    "from": "bank@securepay.fake",
+    "subject": "Daily Newsletter",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T11:00:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Exclusive Offer",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T11:10:00Z",
+    "from": "friend@example.com",
+    "subject": "Lunch Tomorrow?",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T11:20:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Install Patch",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T11:30:00Z",
+    "from": "hr@payro1l.example",
+    "subject": "Invoice Q3",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T11:40:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Confirm Transaction",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T11:50:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Payment Reminder",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T12:00:00Z",
+    "from": "boss@executive.fake",
+    "subject": "Security Warning",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T12:10:00Z",
+    "from": "admin@vpn.fake",
+    "subject": "Antivirus Update",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T12:20:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Urgent Payroll Update",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T12:30:00Z",
+    "from": "service@paypal.fake",
+    "subject": "VPN Login Alert",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T12:40:00Z",
+    "from": "bank@securepay.fake",
+    "subject": "Security Warning",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T12:50:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Daily Newsletter",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T13:00:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Holiday Policy Update",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T13:10:00Z",
+    "from": "bank@securepay.fake",
+    "subject": "Your Order Invoice",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T13:20:00Z",
+    "from": "service@paypal.fake",
+    "subject": "Urgent Payroll Update",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T13:30:00Z",
+    "from": "update@windows.fake",
+    "subject": "Unusual Activity Detected",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T13:40:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Account Locked",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T13:50:00Z",
+    "from": "finance@accounts.fake",
+    "subject": "Install Patch",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T14:00:00Z",
+    "from": "badguy@phish.com",
+    "subject": "VPN Login Alert",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T14:10:00Z",
+    "from": "boss@executive.fake",
+    "subject": "Confirm Transaction",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T14:20:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Password Reset Required",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T14:30:00Z",
+    "from": "support@amazon.fake",
+    "subject": "Confirm Transaction",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T14:40:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Approve Payment",
+    "rule": "MAL_ATTACH",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T14:50:00Z",
+    "from": "ceo@companny.example",
+    "subject": "Approve Payment",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T15:00:00Z",
+    "from": "friend@example.com",
+    "subject": "Antivirus Update",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T15:10:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Unusual Activity Detected",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T15:20:00Z",
+    "from": "badguy@phish.com",
+    "subject": "VPN Login Alert",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T15:30:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Confirm Transaction",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T15:40:00Z",
+    "from": "it-support@fakecorp.com",
+    "subject": "Invoice Q3",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T15:50:00Z",
+    "from": "noreply@random.com",
+    "subject": "Holiday Policy Update",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T16:00:00Z",
+    "from": "badguy@phish.com",
+    "subject": "Urgent Payroll Update",
+    "rule": "DMARC_FAIL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T16:10:00Z",
+    "from": "update@windows.fake",
+    "subject": "Confirm Transaction",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T16:20:00Z",
+    "from": "news@trustednews.com",
+    "subject": "Account Locked",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T16:30:00Z",
+    "from": "marketing@adsblast.com",
+    "subject": "Holiday Policy Update",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T16:40:00Z",
+    "from": "service@paypal.fake",
+    "subject": "Holiday Policy Update",
+    "rule": "BEC_LIKE",
+    "risk": "high",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T16:50:00Z",
+    "from": "shop@onlinestore.fake",
+    "subject": "Confirm Transaction",
+    "rule": "SPF_FAIL",
+    "risk": "medium",
+    "action": "quarantined"
+  },
+  {
+    "ts": "2025-09-02T17:00:00Z",
+    "from": "update@windows.fake",
+    "subject": "Confirm Transaction",
+    "rule": "CLEAN",
+    "risk": "low",
+    "action": "delivered"
+  },
+  {
+    "ts": "2025-09-02T17:10:00Z",
+    "from": "trusted@partner.com",
+    "subject": "Urgent Payroll Update",
+    "rule": "PHISH_URL",
+    "risk": "high",
+    "action": "quarantined"
+  }
+]
