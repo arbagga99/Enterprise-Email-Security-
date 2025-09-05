@@ -25,16 +25,12 @@
     .footer { margin-top: 24px; font-size: 12px; color: var(--muted); }
     .chips { display:flex; flex-wrap:wrap; gap:8px; }
     .chip { display:inline-block; padding:6px 10px; border-radius:999px; background:#eef2ff; font-size:12px; border:1px solid #dbeafe; }
-    .sep { height: 8px; }
-    .err { color:#b91c1c; font-weight:700; }
-    .row { display:flex; gap:16px; flex-wrap:wrap; }
   </style>
 </head>
 <body>
   <h1>Enterprise Email Security – Quarantine Digest</h1>
   <div class="muted" id="runAt">Loading…</div>
 
-  <!-- KPIs -->
   <div class="grid" style="margin-top:14px;">
     <div class="card"><div class="kpi-label">Total Scanned</div><div class="kpi" id="kpiTotal">–</div></div>
     <div class="card"><div class="kpi-label">Blocked Spam</div><div class="kpi" id="kpiSpam">–</div></div>
@@ -43,7 +39,6 @@
     <div class="card"><div class="kpi-label">False Positives</div><div class="kpi" id="kpiFP">–</div></div>
   </div>
 
-  <!-- Charts -->
   <div class="grid" style="margin-top:16px;">
     <div class="card">
       <h3>Rule Breakdown</h3>
@@ -53,12 +48,11 @@
       <h3>Daily Spam+Phish Trend (last 30 days)</h3>
       <canvas id="trendChart" height="160"></canvas>
       <div class="muted" style="font-size:12px;margin-top:6px">
-        Uses <code>docs/data/demo_summary_large.csv</code> if present.
+        Uses <code>docs/data/demo_summary_large.csv</code> if present (optional).
       </div>
     </div>
   </div>
 
-  <!-- Top lists -->
   <div class="grid" style="margin-top:16px;">
     <div class="card">
       <h3>Top Rules</h3>
@@ -70,7 +64,6 @@
     </div>
   </div>
 
-  <!-- Alerts table -->
   <div class="card" style="margin-top:16px;">
     <h3>High-Risk Alerts</h3>
     <div class="overflow">
@@ -98,7 +91,6 @@
   </div>
 
 <script>
-/* ---------- helpers ---------- */
 async function fetchJSON(path){
   const r = await fetch(path);
   if (!r.ok) throw new Error(path + " → " + r.status);
@@ -110,28 +102,21 @@ async function fetchText(path){
   return await r.text();
 }
 function setKPI(id, val){ document.getElementById(id).textContent = (val ?? "–"); }
-function chip(text){ return `<span class="chip">${text}</span>`; }
-function renderChips(containerId, pairs, fmt = (k)=>k){
+function chip(t){ return `<span class="chip">${t}</span>`; }
+function chips(containerId, pairs, fmt=(k)=>k){
   const el = document.getElementById(containerId);
-  if (!pairs || !pairs.length){ el.innerHTML = '<span class="muted">No data</span>'; return; }
+  if (!pairs?.length){ el.innerHTML = '<span class="muted">No data</span>'; return; }
   el.innerHTML = pairs.slice(0,10).map(([k,v]) => chip(`${fmt(k)} — ${v}`)).join("");
 }
 function barChart(ctx, labels, data, title){
-  new Chart(ctx, {
-    type: 'bar',
-    data: { labels, datasets: [{ label: title, data }] },
-    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, scales:{y:{beginAtZero:true}} }
-  });
+  new Chart(ctx, { type:'bar', data:{ labels, datasets:[{ label:title, data }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }});
 }
 function lineChart(ctx, labels, data, title){
-  new Chart(ctx, {
-    type: 'line',
-    data: { labels, datasets: [{ label: title, data, tension:0.25 }] },
-    options: { responsive:true, maintainAspectRatio:false, plugins:{ legend:{display:false} }, scales:{y:{beginAtZero:true}} }
-  });
+  new Chart(ctx, { type:'line', data:{ labels, datasets:[{ label:title, data, tension:0.25 }] },
+    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }});
 }
 function csvSplit(row){
-  // simple CSV splitter that handles quoted commas
   const out=[]; let cur="", q=false;
   for (let i=0;i<row.length;i++){
     const c=row[i];
@@ -143,18 +128,11 @@ function csvSplit(row){
   return out.map(s=>s.replace(/^\"|\"$/g,""));
 }
 
-/* ---------- main ---------- */
 (async () => {
-  // 1) SUMMARY
-  let s = null;
+  // SUMMARY
   try {
-    s = await fetchJSON("./data/demo_summary.json");
-  } catch (e) {
-    document.getElementById("runAt").innerHTML = `<span class="err">Summary load failed:</span> ${e.message}`;
-  }
-  if (s) {
-    // If array (large JSON), pick latest
-    const summary = Array.isArray(s) ? s[s.length - 1] : s;
+    const s = await fetchJSON("./data/demo_summary.json");
+    const summary = Array.isArray(s) ? s[s.length-1] : s;
 
     document.getElementById("runAt").textContent = `Run at: ${summary.run_at || '—'}`;
     setKPI("kpiTotal", summary.scanned_messages ?? "–");
@@ -163,17 +141,17 @@ function csvSplit(row){
     setKPI("kpiMal", summary.blocked_malware ?? 0);
     setKPI("kpiFP", summary.false_positives ?? 0);
 
-    const rulesPairs = (summary.top_rules || []).map(x => Array.isArray(x) ? x : [x.rule ?? x[0], x.hits ?? x[1]]);
-    const sendersPairs = (summary.top_senders || []).map(x => Array.isArray(x) ? x : [x.domain ?? x.sender ?? x[0], x.count ?? x[1]]);
+    const rulesPairs   = (summary.top_rules   || []).map(x => Array.isArray(x) ? x : [x.rule ?? x[0],   x.hits ?? x[1]]);
+    const sendersPairs = (summary.top_senders || []).map(x => Array.isArray(x) ? x : [x.sender ?? x[0], x.count ?? x[1]]);
 
-    renderChips("topRules", rulesPairs);
-    renderChips("topSenders", sendersPairs);
-
-    const rulesCtx = document.getElementById("rulesChart").getContext("2d");
-    barChart(rulesCtx, rulesPairs.map(p=>p[0]), rulesPairs.map(p=>p[1]), "Rule Hits");
+    chips("topRules", rulesPairs);
+    chips("topSenders", sendersPairs);
+    barChart(document.getElementById("rulesChart"), rulesPairs.map(p=>p[0]), rulesPairs.map(p=>p[1]), "Rule Hits");
+  } catch (e) {
+    document.getElementById("runAt").innerHTML = `<span style="color:#b91c1c;font-weight:700">Summary load failed:</span> ${e.message}`;
   }
 
-  // 2) TREND (optional CSV)
+  // TREND (optional)
   try {
     const csv = await fetchText("./data/demo_summary_large.csv"); // optional
     const lines = csv.trim().split(/\r?\n/);
@@ -181,37 +159,33 @@ function csvSplit(row){
     const idxRun   = header.indexOf("run_at");
     const idxSpam  = header.indexOf("blocked_spam");
     const idxPhish = header.indexOf("blocked_phishing");
-    const labels = [], series = [];
-    lines.slice(-30).forEach(row => {
+    const labels=[], series=[];
+    lines.slice(-30).forEach(row=>{
       const cols = csvSplit(row);
-      const d = cols[idxRun] || "";
+      const d = cols[idxRun]||"";
       labels.push(d.replace("T09:00:00Z","").replace("T00:00:00Z",""));
-      series.push(Number(cols[idxSpam]||0) + Number(cols[idxPhish]||0));
+      series.push(Number(cols[idxSpam]||0)+Number(cols[idxPhish]||0));
     });
-    const trendCtx = document.getElementById("trendChart").getContext("2d");
-    lineChart(trendCtx, labels, series, "Daily Spam+Phish");
-  } catch (_) {
-    // silent if file not present
-  }
+    lineChart(document.getElementById("trendChart"), labels, series, "Daily Spam+Phish");
+  } catch (_) {}
 
-  // 3) ALERTS
-  const tbody = document.getElementById("alertsBody");
+  // ALERTS
   try {
     const alerts = await fetchJSON("./data/demo_alerts.json");
     const highs = alerts.filter(a => (a.risk||"").toLowerCase()==="high");
-    const rows = (highs.length ? highs : alerts).slice(0,200).map(a => `
+    const body = document.getElementById("alertsBody");
+    body.innerHTML = (highs.length ? highs : alerts).slice(0,200).map(a => `
       <tr>
         <td>${a.ts||""}</td>
         <td>${a.from||""}</td>
         <td>${a.subject||""}</td>
         <td>${a.rule||""}</td>
-        <td class="${(a.risk||'').toLowerCase()==='high' ? 'risk-high' : 'risk-low'}">${a.risk||""}</td>
+        <td class="${(a.risk||'').toLowerCase()==='high'?'risk-high':'risk-low'}">${a.risk||""}</td>
         <td>${a.action||""}</td>
-      </tr>
-    `).join("");
-    tbody.innerHTML = rows || '<tr><td colspan="6" class="muted">No alerts</td></tr>';
+      </tr>`).join("");
   } catch (e) {
-    tbody.innerHTML = `<tr><td colspan="6" class="err">Alerts load failed: ${e.message}</td></tr>`;
+    document.getElementById("alertsBody").innerHTML =
+      `<tr><td colspan="6" style="color:#b91c1c;font-weight:700">Alerts load failed: ${e.message}</td></tr>`;
   }
 })();
 </script>
