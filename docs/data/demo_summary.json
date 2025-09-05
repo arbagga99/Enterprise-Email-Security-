@@ -1,5 +1,9 @@
-run_at,scanned_messages,blocked_spam,blocked_phishing,blocked_malware,false_positives,top_rules,top_senders
-2025-03-01T09:00:00Z,421,134,48,37,1,"[['SPF_FAIL', 134], ['PHISH_URL', 48], ['MAL_ATTACH', 37]]","[['service@paypal.fake', 20], ['admin@vpn.fake', 12], ['shop@onlinestore.fake', 7], ['update@windows.fake', 8], ['trusted@partner.com', 6]]"
+"run_at": "2025-09-05T09:00:00Z",
+  "scanned_messages": 500,
+  "blocked_spam": 120,
+  "blocked_phishing": 65,
+  "blocked_malware": 42,
+  "false_positives": 3,2025-03-01T09:00:00Z,421,134,48,37,1,"[['SPF_FAIL', 134], ['PHISH_URL', 48], ['MAL_ATTACH', 37]]","[['service@paypal.fake', 20], ['admin@vpn.fake', 12], ['shop@onlinestore.fake', 7], ['update@windows.fake', 8], ['trusted@partner.com', 6]]"
 2025-03-02T09:00:00Z,545,143,64,29,4,"[['SPF_FAIL', 143], ['PHISH_URL', 64], ['MAL_ATTACH', 29]]","[['marketing@adsblast.com', 7], ['finance@accounts.fake', 13], ['support@amazon.fake', 17], ['support@amazon.fake', 10], ['news@trustednews.com', 13]]"
 2025-03-03T09:00:00Z,552,104,63,47,3,"[['SPF_FAIL', 104], ['PHISH_URL', 63], ['MAL_ATTACH', 47]]","[['ceo@companny.example', 16], ['bank@securepay.fake', 7], ['admin@vpn.fake', 19], ['boss@executive.fake', 20], ['service@paypal.fake', 5]]"
 2025-03-04T09:00:00Z,419,101,50,37,1,"[['SPF_FAIL', 101], ['PHISH_URL', 50], ['MAL_ATTACH', 37]]","[['hr@payro1l.example', 14], ['boss@executive.fake', 7], ['alerts@security.fake', 16], ['trusted@partner.com', 5], ['admin@vpn.fake', 19]]"
