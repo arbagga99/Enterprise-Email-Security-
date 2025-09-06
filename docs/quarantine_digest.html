@@ -7,10 +7,10 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
     :root { --fg:#111827; --muted:#6b7280; --card:#f8fafc; --line:#e5e7eb; --bg:#ffffff; }
-    /* --- Stability fixes --- */
+    /* Stability */
     html, body { overflow-anchor: none; scroll-behavior: auto; }
-    canvas { display:block; }            /* avoid inline canvas reflow */
-    /* --- Layout --- */
+    canvas { display:block; }
+    /* Layout */
     * { box-sizing: border-box; }
     body { font-family: system-ui, Arial, sans-serif; margin: 24px; color: var(--fg); background: var(--bg); }
     h1 { margin: 0 0 8px; }
@@ -24,13 +24,12 @@
     .chip { display:inline-block; padding:6px 10px; border-radius:999px; background:#eef2ff; font-size:12px; border:1px solid #dbeafe; }
     table { width:100%; border-collapse: collapse; }
     th, td { padding:8px 10px; border-bottom:1px solid var(--line); text-align:left; font-size:14px; }
-    th { background:#fff; } /* no sticky header to avoid layout shifts */
+    th { background:#fff; } /* no sticky header */
     .risk-high { color:#b91c1c; font-weight:700; }
     .risk-low  { color:#047857; font-weight:700; }
     .overflow { min-height: 260px; max-height: 360px; overflow:auto; background:#fff; border-radius:12px; border:1px solid var(--line); }
     .footer { margin-top: 24px; font-size: 12px; color: var(--muted); }
-    /* Fixed chart areas to prevent jumping while rendering */
-    .chart-wrap { height: 220px; }
+    .chart-wrap { height: 220px; } /* fixed height to avoid jumps */
   </style>
 </head>
 <body>
@@ -52,11 +51,11 @@
       <h3>Rule Breakdown</h3>
       <div class="chart-wrap"><canvas id="rulesChart"></canvas></div>
     </div>
-    <div class="card">
+    <div class="card" id="trendCard">
       <h3>Daily Spam+Phish Trend (last 30 days)</h3>
       <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
       <div class="muted" style="font-size:12px;margin-top:6px">
-        Uses <code>docs/data/demo_summary_large.csv</code> if present (optional).
+        Uses <code>docs/data/demo_summary_large.csv</code> (or <code>.json</code>) if present.
       </div>
     </div>
   </div>
@@ -97,7 +96,7 @@
 
   <div class="footer">
     Served from <code>/docs</code>. Data paths: <code>./data/demo_summary.json</code>, <code>./data/demo_alerts.json</code>,
-    optional <code>./data/demo_summary_large.csv</code>.
+    optional <code>./data/demo_summary_large.csv</code> or <code>.json</code>.
   </div>
 
 <script>
@@ -119,12 +118,12 @@ function chips(containerId, pairs, fmt=(k)=>k){
   if (!pairs?.length){ el.innerHTML = '<span class="muted">No data</span>'; return; }
   el.innerHTML = pairs.slice(0,10).map(([k,v]) => chip(`${fmt(k)} — ${v}`)).join("");
 }
-function barChart(ctx, labels, data, title){
-  new Chart(ctx, {
+function barChart(canvas, labels, data, title){
+  new Chart(canvas.getContext('2d'), {
     type:'bar',
     data:{ labels, datasets:[{ label:title, data }] },
     options:{
-      animation:false,                 // stability: no chart animation
+      animation:false,
       responsive:true,
       maintainAspectRatio:false,
       plugins:{ legend:{ display:false } },
@@ -132,12 +131,12 @@ function barChart(ctx, labels, data, title){
     }
   });
 }
-function lineChart(ctx, labels, data, title){
-  new Chart(ctx, {
+function lineChart(canvas, labels, data, title){
+  new Chart(canvas.getContext('2d'), {
     type:'line',
     data:{ labels, datasets:[{ label:title, data, tension:0.25 }] },
     options:{
-      animation:false,                 // stability: no chart animation
+      animation:false,
       responsive:true,
       maintainAspectRatio:false,
       plugins:{ legend:{ display:false } },
@@ -181,23 +180,39 @@ function csvSplit(row){
     document.getElementById("runAt").innerHTML = `<span style="color:#b91c1c;font-weight:700">Summary load failed:</span> ${e.message}`;
   }
 
-  // 2) TREND (optional)
+  // 2) TREND (CSV first, then JSON; hide card if nothing)
+  const trendCard = document.getElementById("trendCard");
+  let labels = [], series = [];
   try {
-    const csv = await fetchText("./data/demo_summary_large.csv"); // optional
+    // Try CSV
+    const csv = await fetchText("./data/demo_summary_large.csv");
     const lines = csv.trim().split(/\r?\n/);
     const header = lines.shift().split(",");
     const idxRun   = header.indexOf("run_at");
     const idxSpam  = header.indexOf("blocked_spam");
     const idxPhish = header.indexOf("blocked_phishing");
-    const labels=[], series=[];
     lines.slice(-30).forEach(row=>{
       const cols = csvSplit(row);
       const d = cols[idxRun]||"";
       labels.push(d.replace("T09:00:00Z","").replace("T00:00:00Z",""));
       series.push(Number(cols[idxSpam]||0)+Number(cols[idxPhish]||0));
     });
+  } catch (_) {
+    // Try JSON array fallback
+    try {
+      const arr = await fetchJSON("./data/demo_summary_large.json");
+      (arr.slice(-30)).forEach(o=>{
+        const d = o.run_at || "";
+        labels.push(String(d).replace("T09:00:00Z","").replace("T00:00:00Z",""));
+        series.push(Number(o.blocked_spam||0) + Number(o.blocked_phishing||0));
+      });
+    } catch (_) { /* ignore */ }
+  }
+  if (labels.length > 1 && series.some(v => v>0)) {
     lineChart(document.getElementById("trendChart"), labels, series, "Daily Spam+Phish");
-  } catch (_) { /* fine if file missing */ }
+  } else {
+    trendCard.style.display = "none";
+  }
 
   // 3) ALERTS
   try {
