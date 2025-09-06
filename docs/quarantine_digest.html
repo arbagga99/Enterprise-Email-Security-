@@ -24,7 +24,7 @@
     .chip { display:inline-block; padding:6px 10px; border-radius:999px; background:#eef2ff; font-size:12px; border:1px solid #dbeafe; }
     table { width:100%; border-collapse: collapse; }
     th, td { padding:8px 10px; border-bottom:1px solid var(--line); text-align:left; font-size:14px; }
-    th { background:#fff; } /* no sticky header */
+    th { background:#fff; }
     .risk-high { color:#b91c1c; font-weight:700; }
     .risk-low  { color:#047857; font-weight:700; }
     .overflow { min-height: 260px; max-height: 360px; overflow:auto; background:#fff; border-radius:12px; border:1px solid var(--line); }
@@ -55,7 +55,7 @@
       <h3>Daily Spam+Phish Trend (last 30 days)</h3>
       <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
       <div class="muted" style="font-size:12px;margin-top:6px">
-        Uses <code>docs/data/demo_summary_large.csv</code> (or <code>.json</code>) if present.
+        Uses <code>docs/data/demo_summary_large.csv</code> or <code>docs/data/demo_summary_large.json</code> if present.
       </div>
     </div>
   </div>
@@ -96,7 +96,7 @@
 
   <div class="footer">
     Served from <code>/docs</code>. Data paths: <code>./data/demo_summary.json</code>, <code>./data/demo_alerts.json</code>,
-    optional <code>./data/demo_summary_large.csv</code> or <code>.json</code>.
+    optional trend: <code>./data/demo_summary_large.csv</code> or <code>./data/demo_summary_large.json</code>.
   </div>
 
 <script>
@@ -180,39 +180,42 @@ function csvSplit(row){
     document.getElementById("runAt").innerHTML = `<span style="color:#b91c1c;font-weight:700">Summary load failed:</span> ${e.message}`;
   }
 
-  // 2) TREND (CSV first, then JSON; hide card if nothing)
+  // 2) TREND (CSV first, then JSON; hide card if nothing found)
   const trendCard = document.getElementById("trendCard");
   let labels = [], series = [];
-  try {
+
+  async function loadTrend() {
     // Try CSV
-    const csv = await fetchText("./data/demo_summary_large.csv");
-    const lines = csv.trim().split(/\r?\n/);
-    const header = lines.shift().split(",");
-    const idxRun   = header.indexOf("run_at");
-    const idxSpam  = header.indexOf("blocked_spam");
-    const idxPhish = header.indexOf("blocked_phishing");
-    lines.slice(-30).forEach(row=>{
-      const cols = csvSplit(row);
-      const d = cols[idxRun]||"";
-      labels.push(d.replace("T09:00:00Z","").replace("T00:00:00Z",""));
-      series.push(Number(cols[idxSpam]||0)+Number(cols[idxPhish]||0));
-    });
-  } catch (_) {
-    // Try JSON array fallback
     try {
-      const arr = await fetchJSON("./data/demo_summary_large.json");
-      (arr.slice(-30)).forEach(o=>{
-        const d = o.run_at || "";
-        labels.push(String(d).replace("T09:00:00Z","").replace("T00:00:00Z",""));
-        series.push(Number(o.blocked_spam||0) + Number(o.blocked_phishing||0));
+      const csv = await fetchText("./data/demo_summary_large.csv");
+      const lines = csv.trim().split(/\r?\n/);
+      const header = lines.shift().split(",");
+      const iRun = header.indexOf("run_at");
+      const iSpam = header.indexOf("blocked_spam");
+      const iPhish = header.indexOf("blocked_phishing");
+      lines.slice(-30).forEach(row => {
+        const cols = csvSplit(row);
+        labels.push((cols[iRun] || "").replace("T09:00:00Z","").replace("T00:00:00Z",""));
+        series.push(Number(cols[iSpam]||0) + Number(cols[iPhish]||0));
       });
-    } catch (_) { /* ignore */ }
+    } catch (_) {
+      // Try JSON array fallback
+      try {
+        const arr = await fetchJSON("./data/demo_summary_large.json");
+        arr.slice(-30).forEach(o => {
+          labels.push(String(o.run_at||"").replace("T09:00:00Z","").replace("T00:00:00Z",""));
+          series.push(Number(o.blocked_spam||0) + Number(o.blocked_phishing||0));
+        });
+      } catch (_) {}
+    }
+
+    if (labels.length > 1 && series.some(v => v > 0)) {
+      lineChart(document.getElementById("trendChart"), labels, series, "Daily Spam+Phish");
+    } else {
+      trendCard.style.display = "none";
+    }
   }
-  if (labels.length > 1 && series.some(v => v>0)) {
-    lineChart(document.getElementById("trendChart"), labels, series, "Daily Spam+Phish");
-  } else {
-    trendCard.style.display = "none";
-  }
+  await loadTrend();
 
   // 3) ALERTS
   try {
