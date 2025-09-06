@@ -6,9 +6,13 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <style>
-    :root { --fg:#1f2937; --muted:#6b7280; --card:#f8fafc; --line:#e5e7eb; --bg:#ffffff; }
+    :root { --fg:#111827; --muted:#6b7280; --card:#f8fafc; --line:#e5e7eb; --bg:#ffffff; }
+    /* --- Stability fixes --- */
+    html, body { overflow-anchor: none; scroll-behavior: auto; }
+    canvas { display:block; }            /* avoid inline canvas reflow */
+    /* --- Layout --- */
     * { box-sizing: border-box; }
-    body { font-family: system-ui, Arial, sans-serif; margin: 24px; color: var(--fg); background: var(--bg);}
+    body { font-family: system-ui, Arial, sans-serif; margin: 24px; color: var(--fg); background: var(--bg); }
     h1 { margin: 0 0 8px; }
     h3 { margin: 0 0 8px; }
     .muted { color: var(--muted); }
@@ -16,21 +20,24 @@
     .card { background: var(--card); border:1px solid var(--line); border-radius:14px; padding:16px; }
     .kpi { font-size: 28px; font-weight: 800; }
     .kpi-label { font-size: 12px; color: var(--muted); }
+    .chips { display:flex; flex-wrap:wrap; gap:8px; min-height: 40px; }
+    .chip { display:inline-block; padding:6px 10px; border-radius:999px; background:#eef2ff; font-size:12px; border:1px solid #dbeafe; }
     table { width:100%; border-collapse: collapse; }
     th, td { padding:8px 10px; border-bottom:1px solid var(--line); text-align:left; font-size:14px; }
-    th { background:#fff; position:sticky; top:0; z-index:1; }
+    th { background:#fff; } /* no sticky header to avoid layout shifts */
     .risk-high { color:#b91c1c; font-weight:700; }
-    .risk-low { color:#047857; font-weight:700; }
-    .overflow { max-height: 360px; overflow:auto; background:#fff; border-radius:12px; border:1px solid var(--line); }
+    .risk-low  { color:#047857; font-weight:700; }
+    .overflow { min-height: 260px; max-height: 360px; overflow:auto; background:#fff; border-radius:12px; border:1px solid var(--line); }
     .footer { margin-top: 24px; font-size: 12px; color: var(--muted); }
-    .chips { display:flex; flex-wrap:wrap; gap:8px; }
-    .chip { display:inline-block; padding:6px 10px; border-radius:999px; background:#eef2ff; font-size:12px; border:1px solid #dbeafe; }
+    /* Fixed chart areas to prevent jumping while rendering */
+    .chart-wrap { height: 220px; }
   </style>
 </head>
 <body>
   <h1>Enterprise Email Security – Quarantine Digest</h1>
   <div class="muted" id="runAt">Loading…</div>
 
+  <!-- KPIs -->
   <div class="grid" style="margin-top:14px;">
     <div class="card"><div class="kpi-label">Total Scanned</div><div class="kpi" id="kpiTotal">–</div></div>
     <div class="card"><div class="kpi-label">Blocked Spam</div><div class="kpi" id="kpiSpam">–</div></div>
@@ -39,20 +46,22 @@
     <div class="card"><div class="kpi-label">False Positives</div><div class="kpi" id="kpiFP">–</div></div>
   </div>
 
+  <!-- Charts -->
   <div class="grid" style="margin-top:16px;">
     <div class="card">
       <h3>Rule Breakdown</h3>
-      <canvas id="rulesChart" height="160"></canvas>
+      <div class="chart-wrap"><canvas id="rulesChart"></canvas></div>
     </div>
     <div class="card">
       <h3>Daily Spam+Phish Trend (last 30 days)</h3>
-      <canvas id="trendChart" height="160"></canvas>
+      <div class="chart-wrap"><canvas id="trendChart"></canvas></div>
       <div class="muted" style="font-size:12px;margin-top:6px">
         Uses <code>docs/data/demo_summary_large.csv</code> if present (optional).
       </div>
     </div>
   </div>
 
+  <!-- Top lists -->
   <div class="grid" style="margin-top:16px;">
     <div class="card">
       <h3>Top Rules</h3>
@@ -64,6 +73,7 @@
     </div>
   </div>
 
+  <!-- Alerts table -->
   <div class="card" style="margin-top:16px;">
     <h3>High-Risk Alerts</h3>
     <div class="overflow">
@@ -91,6 +101,7 @@
   </div>
 
 <script>
+/* ---------- helpers ---------- */
 async function fetchJSON(path){
   const r = await fetch(path);
   if (!r.ok) throw new Error(path + " → " + r.status);
@@ -109,12 +120,30 @@ function chips(containerId, pairs, fmt=(k)=>k){
   el.innerHTML = pairs.slice(0,10).map(([k,v]) => chip(`${fmt(k)} — ${v}`)).join("");
 }
 function barChart(ctx, labels, data, title){
-  new Chart(ctx, { type:'bar', data:{ labels, datasets:[{ label:title, data }] },
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }});
+  new Chart(ctx, {
+    type:'bar',
+    data:{ labels, datasets:[{ label:title, data }] },
+    options:{
+      animation:false,                 // stability: no chart animation
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{ y:{ beginAtZero:true } }
+    }
+  });
 }
 function lineChart(ctx, labels, data, title){
-  new Chart(ctx, { type:'line', data:{ labels, datasets:[{ label:title, data, tension:0.25 }] },
-    options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{y:{beginAtZero:true}} }});
+  new Chart(ctx, {
+    type:'line',
+    data:{ labels, datasets:[{ label:title, data, tension:0.25 }] },
+    options:{
+      animation:false,                 // stability: no chart animation
+      responsive:true,
+      maintainAspectRatio:false,
+      plugins:{ legend:{ display:false } },
+      scales:{ y:{ beginAtZero:true } }
+    }
+  });
 }
 function csvSplit(row){
   const out=[]; let cur="", q=false;
@@ -128,8 +157,9 @@ function csvSplit(row){
   return out.map(s=>s.replace(/^\"|\"$/g,""));
 }
 
+/* ---------- main ---------- */
 (async () => {
-  // SUMMARY
+  // 1) SUMMARY
   try {
     const s = await fetchJSON("./data/demo_summary.json");
     const summary = Array.isArray(s) ? s[s.length-1] : s;
@@ -151,7 +181,7 @@ function csvSplit(row){
     document.getElementById("runAt").innerHTML = `<span style="color:#b91c1c;font-weight:700">Summary load failed:</span> ${e.message}`;
   }
 
-  // TREND (optional)
+  // 2) TREND (optional)
   try {
     const csv = await fetchText("./data/demo_summary_large.csv"); // optional
     const lines = csv.trim().split(/\r?\n/);
@@ -167,9 +197,9 @@ function csvSplit(row){
       series.push(Number(cols[idxSpam]||0)+Number(cols[idxPhish]||0));
     });
     lineChart(document.getElementById("trendChart"), labels, series, "Daily Spam+Phish");
-  } catch (_) {}
+  } catch (_) { /* fine if file missing */ }
 
-  // ALERTS
+  // 3) ALERTS
   try {
     const alerts = await fetchJSON("./data/demo_alerts.json");
     const highs = alerts.filter(a => (a.risk||"").toLowerCase()==="high");
